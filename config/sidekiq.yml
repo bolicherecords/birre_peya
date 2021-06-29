@@ -1,0 +1,17 @@
+:queues:
+  - prod_hb
+  - dev_hb
+
+:schedule:
+  prod_hb:
+    cron: '*/2 * * * * America/Santiago' # every 2 minutes
+    class: HeartBeatWorker
+    enabled: <%= ENV['PRODUCTION_ENABLED'] %>
+    queue: 'prod_hb'
+    args: ['PROD']
+  dev_hb:
+    cron: '*/2 * * * * America/Santiago' # every 2 minutes
+    class: HeartBeatWorker
+    enabled: <%= ENV['DEVELOPMENT_ENABLED'] %>
+    queue: 'dev_hb'
+    args: ['DEV']
